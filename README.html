@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentação e Histórico do Conversor 3D</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --card-border: #334155;
+            --primary: #38bdf8;
+            --primary-hover: #0284c7;
+            --accent: #818cf8;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --code-bg: #090d16;
+            --success: #34d399;
+            --warning: #fbbf24;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.7;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        nav.toc {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        nav.toc h2 {
+            font-size: 1.3rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        nav.toc ul {
+            list-style: none;
+        }
+
+        nav.toc li {
+            margin-bottom: 0.6rem;
+        }
+
+        nav.toc a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        nav.toc a:hover {
+            color: #7dd3fc;
+            text-decoration: underline;
+        }
+
+        section {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 1.75rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+        }
+
+        section h2 {
+            font-size: 1.4rem;
+            color: var(--primary);
+            border-bottom: 2px solid var(--card-border);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.2rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin-bottom: 0.4rem;
+        }
+
+        code {
+            font-family: 'Fira Code', monospace;
+            background-color: rgba(56, 189, 248, 0.1);
+            color: #7dd3fc;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        pre {
+            background-color: var(--code-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 1.25rem;
+            overflow-x: auto;
+            margin-bottom: 1.2rem;
+        }
+
+        pre code {
+            background-color: transparent;
+            color: #e2e8f0;
+            padding: 0;
+            font-size: 0.88rem;
+            line-height: 1.5;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge-success {
+            background-color: rgba(52, 211, 153, 0.15);
+            color: var(--success);
+            border: 1px solid var(--success);
+        }
+
+        .badge-warning {
+            background-color: rgba(251, 191, 36, 0.15);
+            color: var(--warning);
+            border: 1px solid var(--warning);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--card-border);
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎬 Conversor 3D Side-by-Side para Anáglifo & 2D</h1>
+            <p>Documentação Completa, Histórico de Melhorias e Manual de Uso</p>
+        </header>
+
+        <nav class="toc">
+            <h2>📑 Índice de Conteúdo</h2>
+            <ul>
+                <li><a href="#secao-1">1. Verificação Inicial do Script Original (`convert3D.py`)</a></li>
+                <li><a href="#secao-2">2. Criação da Versão Otimizada (`convert3D_v2.py`)</a></li>
+                <li><a href="#secao-3">3. Tratamento de Erros e Limpeza de Arquivos Corrompidos</a></li>
+                <li><a href="#secao-4">4. Menu Interativo de Modos de Conversão</a></li>
+                <li><a href="#secao-5">5. Modo Amostra de 1 Minuto (Para Teste Rápido)</a></li>
+                <li><a href="#secao-6">6. Seleção Dinâmica do Diretório Alvo</a></li>
+                <li><a href="#secao-7">7. Comandos de Execução no Linux Ubuntu</a></li>
+                <li><a href="#secao-8">8. Código Fonte Completo do `convert3D_v2.py`</a></li>
+                <li><a href="#secao-9">9. Criação da Versão Otimizada v3 (`convert3D_v3.py`) - Dubois & 16:9</a></li>
+                <li><a href="#secao-10">10. Guia Passo a Passo do Menu Interativo (`convert3D_v3.py`)</a></li>
+            </ul>
+        </nav>
+
+        <section id="secao-1">
+            <h2>1. Verificação Inicial do Script Original (`convert3D.py`)</h2>
+            <p>A análise inicial do script original <code>convert3D.py</code> confirmou que:</p>
+            <ul>
+                <li><span class="badge badge-success">Sintaxe OK</span> O código Python não possuía erros de compilação ou sintaxe.</li>
+                <li><span class="badge badge-success">FFmpeg OK</span> Os filtros FFmpeg configurados para desdobramento de vídeo 3D Side-by-Side (SBS) funcionam corretamente.</li>
+            </ul>
+            <p><strong>Observações técnicas levantadas:</strong></p>
+            <ul>
+                <li>O script reprocessava todos os vídeos a cada execução, mesmo que já tivessem sido convertidos previamente.</li>
+                <li>Se interrompido no meio, arquivos parciais podiam ser mantidos.</li>
+            </ul>
+        </section>
+
+        <section id="secao-2">
+            <h2>2. Criação da Versão Otimizada (`convert3D_v2.py`)</h2>
+            <p>Para preservar a versão original do usuário, foi criado o arquivo <code>convert3D_v2.py</code>.</p>
+            <p><strong>Melhoria implementada:</strong> Adicionada verificação de existência com <code>os.path.exists()</code> para evitar a reconversão desnecessária de arquivos de saída que já estejam presentes no disco.</p>
+        </section>
+
+        <section id="secao-3">
+            <h2>3. Tratamento de Erros e Limpeza de Arquivos Corrompidos</h2>
+            <p>Foi esclarecido o comportamento do programa caso o <code>ffmpeg</code> apresente algum erro durante a conversão:</p>
+            <ul>
+                <li><strong>O script NÃO é interrompido:</strong> Ele captura o erro, exibe a mensagem de falha no terminal e prossegue para o próximo vídeo/pasta.</li>
+                <li><strong>Limpeza Automática:</strong> Caso ocorra um erro durante a conversão, qualquer arquivo parcial ou corrompido gerado durante a tentativa é removido automaticamente do disco para não impedir tentativas futuras.</li>
+            </ul>
+        </section>
+
+        <section id="secao-4">
+            <h2>4. Menu Interativo de Modos de Conversão</h2>
+            <p>Implementado um menu inicial interativo para que o usuário possa escolher o tipo de saída desejado:</p>
+            <ul>
+                <li><code>[1]</code> Converter para 3D Anáglifo E 2D (Ambos - Padrão)</li>
+                <li><code>[2]</code> Converter APENAS para 3D Anáglifo</li>
+                <li><code>[3]</code> Converter APENAS para 2D</li>
+                <li><code>[0]</code> Sair</li>
+            </ul>
+        </section>
+
+        <section id="secao-5">
+            <h2>5. Modo Amostra de 1 Minuto (Para Teste Rápido)</h2>
+            <p>Adicionada a escolha de duração antes da conversão:</p>
+            <ul>
+                <li><strong>Vídeo Completo:</strong> Converte o arquivo por inteiro.</li>
+                <li><strong>Amostra (1 minuto):</strong> Adiciona a flag <code>-t 60</code> ao FFmpeg e insere o sufixo <code>_sample</code> no nome dos arquivos gerados (ex: <code>video_Anaglifo_3D_sample.mp4</code>), permitindo testes rápidos sem sobrescrever nem demorar.</li>
+            </ul>
+        </section>
+
+        <section id="secao-6">
+            <h2>6. Seleção Dinâmica do Diretório Alvo</h2>
+            <p>Foi removida a restrição de ter que mover o script para dentro da pasta dos vídeos.</p>
+            <p>Agora o script solicita a pasta desejada no início, suportando caminhos relativos, absolutos ou atalhos como <code>~/Vídeos</code>. Ao apertar <strong>Enter</strong>, ele utiliza o diretório atual.</p>
+        </section>
+
+        <section id="secao-7">
+            <h2>7. Comandos de Execução no Linux Ubuntu</h2>
+
+            <p><strong>Forma 1: Executar na mesma pasta do script</strong></p>
+            <pre><code>cd /home/paulo/Vídeos/Conversor_3D
+python3 convert3D_v3.py</code></pre>
+
+            <p><strong>Forma 2: Executar de qualquer pasta do sistema</strong></p>
+            <pre><code>python3 /home/paulo/Vídeos/Conversor_3D/convert3D_v3.py</code></pre>
+
+            <p><strong>Forma 3: Criar um atalho permanente no terminal (Alias)</strong></p>
+            <pre><code>echo "alias convert3d='python3 /home/paulo/Vídeos/Conversor_3D/convert3D_v3.py'" >> ~/.bashrc
+source ~/.bashrc</code></pre>
+            <p>Após criar o alias, basta digitar no terminal:</p>
+            <pre><code>convert3d</code></pre>
+        </section>
+
+        <section id="secao-8">
+            <h2>8. Código Fonte Completo do `convert3D_v2.py`</h2>
+            <pre><code>import os
+import sys
+import subprocess
+
+# Extensões de vídeo suportadas
+EXTENSOES_SUPORTADAS = ('.mp4', '.mkv', '.avi', '.mov')
+
+def exibir_menu():
+    print("==========================================================")
+    print("      CONVERSOR 3D - Escolha o modo de execução")
+    print("==========================================================")
+    print(" [1] Converter para 3D Anáglifo E 2D (Ambos - Padrão)")
+    print(" [2] Converter APENAS para 3D Anáglifo")
+    print(" [3] Converter APENAS para 2D")
+    print(" [0] Sair")
+    print("==========================================================")
+    
+    try:
+        modo = input("Selecione o tipo de conversão [1]: ").strip()
+    except (KeyboardInterrupt, EOFError):
+        print("\nOperação cancelada pelo usuário.")
+        sys.exit(0)
+        
+    if modo == "":
+        modo = "1"
+        
+    if modo not in ("1", "2", "3", "0"):
+        print("❌ Opção inválida! Utilizando a opção padrão [1].\n")
+        modo = "1"
+        
+    if modo == "0":
+        print("Saindo do conversor.")
+        sys.exit(0)
+        
+    print("\n----------------------------------------------------------")
+    print(" Escolha a duração do processamento:")
+    print(" [1] Vídeo Completo (Padrão)")
+    print(" [2] Amostra de 1 minuto (para teste rápido)")
+    print("----------------------------------------------------------")
+    
+    try:
+        duracao_op = input("Selecione a duração [1]: ").strip()
+    except (KeyboardInterrupt, EOFError):
+        print("\nOperação cancelada pelo usuário.")
+        sys.exit(0)
+        
+    e_amostra = duracao_op == "2"
+    
+    print("\n----------------------------------------------------------")
+    print(" Informe a pasta onde os vídeos estão armazenados:")
+    print(" (Aperte Enter para usar a pasta atual)")
+    print("----------------------------------------------------------")
+    
+    try:
+        pasta_input = input(f"Caminho [{os.getcwd()}]: ").strip()
+    except (KeyboardInterrupt, EOFError):
+        print("\nOperação cancelada pelo usuário.")
+        sys.exit(0)
+        
+    if not pasta_input:
+        diretorio_alvo = os.getcwd()
+    else:
+        diretorio_alvo = os.path.abspath(os.path.expanduser(pasta_input))
+        
+    if not os.path.isdir(diretorio_alvo):
+        print(f"❌ O diretório informado não existe: {diretorio_alvo}")
+        sys.exit(1)
+
+    print("\n==========================================================")
+    if e_amostra:
+        print("⚡ Modo Amostra ativado: será gerado apenas 1 minuto de vídeo.")
+    else:
+        print("🎬 Modo Completo ativado: o vídeo inteiro será processado.")
+    print(f"📂 Diretório alvo: {diretorio_alvo}")
+    print("==========================================================")
+
+    return modo, e_amostra, diretorio_alvo
+
+def processar_pastas():
+    modo, e_amostra, diretorio_alvo = exibir_menu()
+    
+    # Define o que será processado com base na escolha
+    quer_anaglifo = modo in ("1", "2")
+    quer_2d = modo in ("1", "3")
+    
+    # Sufixo para diferenciar os arquivos de amostra dos completos
+    sufixo_sample = "_sample" if e_amostra else ""
+
+    print("\n==========================================================")
+    print(" Iniciando busca recorrente e conversão de arquivos 3D")
+    print("==========================================================")
+    
+    # os.walk percorre recursivamente a pasta informada e todas as subpastas
+    for raiz, pastas, arquivos in os.walk(diretorio_alvo):
+        for arquivo in arquivos:
+            # Verifica se é um arquivo de vídeo suportado
+            if arquivo.lower().endswith(EXTENSOES_SUPORTADAS):
+                
+                # Regra de ouro: Só processa se tiver "3D" no nome
+                # Ignora arquivos que o próprio script já possa ter gerado antes
+                if ("3d" in arquivo.lower() 
+                        and "_anaglifo_3d" not in arquivo.lower() 
+                        and "_2d" not in arquivo.lower()
+                        and "_sample" not in arquivo.lower()):
+                    
+                    caminho_completo = os.path.join(raiz, arquivo)
+                    nome_base, extensao = os.path.splitext(arquivo)
+                    
+                    # Define os caminhos de saída na mesma pasta do arquivo original
+                    saida_anaglifo = os.path.join(raiz, f"{nome_base}_Anaglifo_3D{sufixo_sample}{extensao}")
+                    saida_2d = os.path.join(raiz, f"{nome_base}_2D{sufixo_sample}{extensao}")
+                    
+                    # Verifica existência prévia dos arquivos convertidos
+                    anaglifo_existe = os.path.exists(saida_anaglifo)
+                    d2_existe = os.path.exists(saida_2d)
+                    
+                    # Verifica se o que o usuário solicitou já existe no disco
+                    precisa_anaglifo = quer_anaglifo and not anaglifo_existe
+                    precisa_2d = quer_2d and not d2_existe
+                    
+                    if not precisa_anaglifo and not precisa_2d:
+                        print(f"\n⏭️ Pulando '{arquivo}': Formatos solicitados ({'Amostra' if e_amostra else 'Completo'}) já existem.")
+                        continue
+                    
+                    print(f"\n🎬 Vídeo 3D encontrado em: {raiz}")
+                    print(f"📄 Arquivo: {arquivo}")
+                    print("-" * 58)
+                    
+                    # Executa os comandos no terminal do Ubuntu de forma segura
+                    try:
+                        # 1. CONVERSÃO PARA 3D ANÁGLIFO PERFEITO
+                        if quer_anaglifo:
+                            if not anaglifo_existe:
+                                print(f"🔄 Gerando versão 3D Anáglifo ({'Amostra 1 min' if e_amostra else 'Completo'})...")
+                                cmd_anaglifo = [
+                                    'ffmpeg', '-i', caminho_completo,
+                                    '-sws_flags', 'lanczos',
+                                    '-filter_complex', '[0:v]split=2[left_raw][right_raw]; [left_raw]crop=iw/2:ih:0:0,scale=1920:1080[left]; [right_raw]crop=iw/2:ih:iw/2:0,scale=1920:1080[right]; [left]lutrgb=g=0:b=0[red]; [right]lutrgb=r=0[cyan]; [red][cyan]blend=all_mode=\'addition\',setsar=1',
+                                    '-c:v', 'libx264', '-crf', '18', '-pix_fmt', 'yuv420p', '-c:a', 'copy'
+                                ]
+                                if e_amostra:
+                                    cmd_anaglifo.extend(['-t', '60'])
+                                cmd_anaglifo.extend([saida_anaglifo, '-y'])
+                                
+                                subprocess.run(cmd_anaglifo, check=True)
+                            else:
+                                print("⏩ Versão 3D Anáglifo já existe. Pulando...")
+                        
+                        # 2. CONVERSÃO PARA 2D PERFEITO
+                        if quer_2d:
+                            if not d2_existe:
+                                print(f"🔄 Gerando versão 2D ({'Amostra 1 min' if e_amostra else 'Completo'})...")
+                                cmd_2d = [
+                                    'ffmpeg', '-i', caminho_completo,
+                                    '-sws_flags', 'lanczos',
+                                    '-vf', 'crop=iw/2:ih:0:0,scale=1920:1080,setsar=1',
+                                    '-c:v', 'libx264', '-crf', '18', '-pix_fmt', 'yuv420p', '-c:a', 'copy'
+                                ]
+                                if e_amostra:
+                                    cmd_2d.extend(['-t', '60'])
+                                cmd_2d.extend([saida_2d, '-y'])
+                                
+                                subprocess.run(cmd_2d, check=True)
+                            else:
+                                print("⏩ Versão 2D já existe. Pulando...")
+
+                        print(f"✅ Processamento concluído com sucesso!")
+                    except subprocess.CalledProcessError as e:
+                        print(f"❌ Erro ao processar o arquivo {arquivo}: {e}")
+                        # Remove arquivos incompletos/corrompidos gerados nesta tentativa falha
+                        if quer_anaglifo and not anaglifo_existe and os.path.exists(saida_anaglifo):
+                            try:
+                                os.remove(saida_anaglifo)
+                                print(f"🧹 Arquivo incompleto removido: {saida_anaglifo}")
+                            except OSError:
+                                pass
+                        if quer_2d and not d2_existe and os.path.exists(saida_2d):
+                            try:
+                                os.remove(saida_2d)
+                                print(f"🧹 Arquivo incompleto removido: {saida_2d}")
+                            except OSError:
+                                pass
+
+    print("\n==========================================================")
+    print(" 🎉 Varredura e conversões concluídas!")
+    print("==========================================================")
+
+if __name__ == "__main__":
+    processar_pastas()
+</code></pre>
+        </section>
+
+        <section id="secao-9">
+            <h2>9. Criação da Versão Otimizada v3 (`convert3D_v3.py`) - Dubois & 16:9</h2>
+            <p>A versão <code>convert3D_v3.py</code> foi desenvolvida para aproveitar os recursos nativos do <strong>FFmpeg n4.3.1</strong> (Snap no Ubuntu):</p>
+            <ul>
+                <li><strong>Método Dubois (`stereo3d=in=sbs2l:out=arcd`)</strong>: Substitui a projeção manual <code>lutrgb/blend</code> pelo algoritmo matricial Dubois. Isso reduz drasticamente o efeito de <em>ghosting</em> (fantasma), preserva fidelidade cromática e diminui a fadiga visual ao utilizar óculos 3D Anáglifo.</li>
+                <li><strong>Aproveitamento Máximo da Tela (16:9 Fullscreen)</strong>: Aplica o redimensionamento <code>scale=1920:1080,setsar=1</code> para que a imagem ocupe 100% da área útil em telas Full HD 16:9 sem distorções horizontais.</li>
+                <li><strong>Perfil de Saturação Ajustável</strong>: Suporte a modo Cores Vívidas (+20% saturação via <code>eq=saturation=1.20</code>) e modo Dubois Padrão.</li>
+                <li><strong>Busca Rápida na Amostra (Fast Seeking)</strong>: Permite pular aberturas e logotipos ajustando o minuto de início da amostra (ex: <code>-ss 00:05:00</code> para iniciar aos 5 minutos).</li>
+            </ul>
+        </section>
+
+        <section id="secao-10">
+            <h2>10. Guia Passo a Passo do Menu Interativo (`convert3D_v3.py`)</h2>
+            <p>O script <code>convert3D_v3.py</code> oferece um menu totalmente interativo no terminal. Abaixo está o detalhamento de cada etapa de configuração:</p>
+
+            <ol>
+                <li>
+                    <strong>Etapa 1: Seleção do Modo de Conversão</strong>
+                    <ul>
+                        <li><code>[1] Ambos (Padrão)</code>: Converte os vídeos para 3D Anáglifo e também gera a versão 2D.</li>
+                        <li><code>[2] APENAS 3D Anáglifo</code>: Renderiza apenas a versão 3D para óculos Red/Cyan.</li>
+                        <li><code>[3] APENAS 2D</code>: Extrai apenas a visão 2D (olho esquerdo) em 16:9 Full HD.</li>
+                        <li><code>[0] Sair</code>: Cancela e encerra o script.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Etapa 2: Perfil de Saturação de Cores (3D Anáglifo)</strong>
+                    <ul>
+                        <li><code>[1] Padrão Dubois (Recomendado)</code>: Utiliza a matriz Dubois pura. Mantém cores equilibradas sem provocar tremores ou fadiga visual.</li>
+                        <li><code>[2] Cores Vívidas (+20%)</code>: Aplica o filtro <code>eq=saturation=1.20</code> para aumentar a vivacidade das cores.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Etapa 3: Duração do Processamento</strong>
+                    <ul>
+                        <li><code>[1] Vídeo Completo</code>: Processa todo o arquivo de vídeo do início ao fim.</li>
+                        <li><code>[2] Amostra de 1 Minuto</code>: Processa um trecho rápido de 60 segundos para teste.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Etapa 4: Minuto de Início da Amostra (Seek)</strong>
+                    <ul>
+                        <li>Disponível quando o modo <strong>Amostra [2]</strong> é selecionado.</li>
+                        <li>Permite definir em qual minuto do filme a amostra começará (Padrão: <code>5</code> minutos).</li>
+                        <li>Utiliza busca rápida (<code>-ss 00:05:00</code>) antes da decodificação para ignorar vinhetas e logotipos iniciais.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Etapa 5: Seleção da Pasta / Diretório Alvo</strong>
+                    <ul>
+                        <li>Solicita o caminho da pasta onde estão os arquivos de vídeo. Pressionar <strong>Enter</strong> utiliza o diretório atual do terminal.</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <p><strong>Exemplo de Execução no Terminal:</strong></p>
+            <pre><code>$ python3 /home/paulo/Vídeos/Conversor_3D/convert3D_v3.py
+
+==========================================================
+      CONVERSOR 3D (v3) - Otimizado para FFmpeg n4.3.1
+   (Método Dubois para Cores Perfeitas + Saída 16:9 1080p)
+==========================================================
+ [1] Converter para 3D Anáglifo E 2D (Ambos - Padrão)
+ [2] Converter APENAS para 3D Anáglifo (Dubois Red/Cyan)
+ [3] Converter APENAS para 2D (Mono Left 16:9)
+ [0] Sair
+==========================================================
+Selecione o tipo de conversão [1]: 1
+
+----------------------------------------------------------
+ Perfil de Saturação de Cores (para 3D Anáglifo):
+ [1] Padrão Dubois (Recomendado - Cores naturais & Sem tremores)
+ [2] Cores Vívidas / Saturação +20% (Cores mais intensas)
+----------------------------------------------------------
+Selecione a saturação [1]: 1
+
+----------------------------------------------------------
+ Escolha a duração do processamento:
+ [1] Vídeo Completo (Padrão)
+ [2] Amostra de 1 minuto (Iniciando aos 5 minutos - Pula aberturas)
+----------------------------------------------------------
+Selecione a duração [1]: 2
+Minuto de início para a amostra [5]: 5
+
+----------------------------------------------------------
+ Informe a pasta onde os vídeos estão armazenados:
+ (Aperte Enter para usar a pasta atual)
+----------------------------------------------------------
+Caminho [/home/paulo/Vídeos/Conversor_3D]: 
+
+==========================================================
+⚡ Modo Amostra ativado: 1 minuto gravado a partir dos 5m00s do filme.
+🎨 Perfil de Cores: Dubois Padrão (Natural)
+📐 Proporção de Saída: 16:9 Fullscreen (1920x1080, SAR 1:1)
+📂 Diretório alvo: /home/paulo/Vídeos/Conversor_3D
+==========================================================</code></pre>
+        </section>
+
+        <footer>
+            <p>© <strong><a href="https://pj.pro.br" target="_blank" style="color: var(--primary); text-decoration: none;">Paulo Jorge dos Santos</a></strong> | Site: <a href="https://pj.pro.br" target="_blank" style="color: var(--primary);">https://pj.pro.br</a></p>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.3rem;">Software Open Source — Livre para qualquer pessoa baixar, alterar e usar.</p>
+            <p style="margin-top: 0.8rem;"><a href="README.md" style="color: var(--accent); font-weight: 500;">📄 Ver versão em Markdown (README.md)</a></p>
+        </footer>
+    </div>
+</body>
+</html>
