@@ -394,4 +394,4 @@ Caminho [/home/paulo/Vídeos/Conversor_3D]:
 
 ---
 
-📄 **Versão HTML:** [Site do projeto: ](https://pjpro.github.io/Convert3D/)
+📄 **Versão HTML:** [Site do projeto](https://pjpro.github.io/Convert3D/)
