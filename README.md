@@ -2,7 +2,7 @@
 
 Documentação Completa, Histórico de Melhorias e Manual de Uso
 
-##OBSERVAÇÕES IMPORTANTES:
+## OBSERVAÇÕES IMPORTANTES:
 
 **1)** Todos os caminhos (diretórios) citados correspondem à minha máquina pessoal. Adapte ao seu caso.
 **2)** Testado no Ubuntu 26.04. Adapte ao seu sistema operacional.
