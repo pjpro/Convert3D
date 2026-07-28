@@ -1,6 +1,15 @@
-# 🎬 Conversor 3D Side-by-Side para Anáglifo & 2D
+# 🎬 Conversor de vídeos 3D Side-by-Side para Anáglifo (óculos red-cian) & 2D
 
 Documentação Completa, Histórico de Melhorias e Manual de Uso
+
+##OBSERVAÇÕES IMPORTANTES:##
+**1)** Todos os caminhos (diretórios) citados correspondem à minha máquina pessoal. Adapte ao seu caso.
+**2)** Testado no Ubuntu 26.04. Adapte ao seu sistema operacional.
+**3)** Precisa ter o ffmpeg instalado. No meu caso, instalei a última versão estável, via SNAP. 
+**4)** Utilizei o Gemini para adaptar meu programa original e encontrar os melhores parâmetros para o ffmpeg. Foram incontáveis horas!
+**5)** Esse programa em Python foi criado porque não encontrei nenhuma solução viável de programa de conversão.
+**6)** Use por sua conta e risco.
+
 
 ## 📑 Índice de Conteúdo
 
@@ -385,4 +394,4 @@ Caminho [/home/paulo/Vídeos/Conversor_3D]:
 
 ---
 
-📄 **Versão HTML:** [Ver arquivo `README.html`](README.html)
+📄 **Versão HTML:** [Ver arquivo `README.html`](https://pjpro.github.io/Convert3D/README.html)
